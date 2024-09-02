@@ -15,25 +15,28 @@ export default function Question({
         isCorrect: null
     })
 
-    let timer = 10000
-    if (answer.selectAnswer) {
-        timer = 1000
+    let timer = 10000;
+
+    if (answer.selectedAnswer) {
+        timer = 1000;
     }
 
     if (answer.isCorrect !== null) {
-        timer = 2000
+        timer = 2000;
     }
+
+
 
     function handleSelectAnswer(answer) {
         setAnwer({
             selectAnswer: answer,
-            isCorrect: QUESTIONS[index].answers[0] === answer
+            isCorrect: null
         })
 
         setTimeout(() => {
             setAnwer({
                 selectAnswer: answer,
-                isCorrect: true
+                isCorrect: QUESTIONS[index].answers[0] === answer
             })
 
             setTimeout(() => {

@@ -2,11 +2,12 @@ import { useCallback, useRef, useState } from "react"
 import QUESTIONS from '../question.js'
 import quizCompleteImg from '../assets/quiz-complete.png'
 import Question from "./Question.jsx"
+import Summary from "./Summary.jsx"
 
 export default function Quiz() {
 
     const [userAnswer, setUserAnswers] = useState([])
-    // const shuffledAnswers = useRef();
+
     const activeQuestionIndex = userAnswer.length;
 
     const quizIsComplete = activeQuestionIndex === QUESTIONS.length
@@ -24,10 +25,7 @@ export default function Quiz() {
     const handleSkipAnswer = useCallback(() => handleSelectAnsewer(null), [handleSelectAnsewer])
 
     if (quizIsComplete) {
-        return <div id="summary">
-            <img src={quizCompleteImg} alt="Trophy icon" />
-            <h2>Quiz Completed!</h2>
-        </div>
+        return <Summary userAnswers={userAnswer} />
     }
 
     // if (!shuffledAnswers.current) {
@@ -39,6 +37,7 @@ export default function Quiz() {
     return (
         <div id="quiz">
             <Question
+                key={activeQuestionIndex}
                 index={activeQuestionIndex}
                 onSelectAnswer={handleSelectAnsewer}
                 onSkipAnswer={handleSkipAnswer}
